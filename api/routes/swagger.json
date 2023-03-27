@@ -1,0 +1,544 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"version": "1.0.0",
+		"title": "ShopMate API",
+		"description": "ShopMate's API",
+		"contact": { "email": "jm.esparev@gmail.com" }
+	},
+	"servers": [
+		{ "url": "http://localhost:3000/api/v1" },
+		{ "url": "https://shopmate.up.railway.app/api/v1" }
+	],
+	"paths": {
+		"/users": {
+			"post": {
+				"tags": ["users"],
+				"summary": "Create a new user",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "user",
+						"description": "User object",
+						"required": true,
+						"schema": {
+							"$ref": "#/components/schemas/User"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/components/schemas/User"
+						}
+					}
+				}
+			},
+			"get": {
+				"tags": ["users"],
+				"summary": "Get all users",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/User"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/{username}": {
+			"get": {
+				"tags": ["users"],
+				"summary": "Get a user by username",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "username",
+						"description": "User username",
+						"required": true,
+						"type": "string",
+						"format": "uuid",
+						"example": "john-doe"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/User"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid username supplied"
+					},
+					"404": {
+						"description": "User not found"
+					}
+				}
+			},
+			"patch": {
+				"tags": ["users"],
+				"summary": "Update user by username",
+				"description": "Update user information by username",
+				"operationId": "updateUserById",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/User"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "User updated successfully"
+					},
+					"400": {
+						"description": "Invalid username supplied"
+					},
+					"404": {
+						"description": "User not found"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["users"],
+				"summary": "Delete user by username",
+				"description": "Delete user information by username",
+				"operationId": "deleteUserById",
+				"responses": {
+					"200": {
+						"description": "User deleted successfully"
+					},
+					"400": {
+						"description": "Invalid username supplied"
+					},
+					"404": {
+						"description": "User not found"
+					}
+				}
+			}
+		},
+		"/payment-methods": {
+			"post": {
+				"tags": ["payment-methods"],
+				"summary": "Create a new payment method",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "payment method",
+						"description": "PaymentMethod object",
+						"required": true,
+						"schema": {
+							"$ref": "#/components/schemas/PaymentMethod"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/components/schemas/PaymentMethod"
+						}
+					}
+				}
+			},
+			"get": {
+				"tags": ["payment-methods"],
+				"summary": "Get all payment methods",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/PaymentMethod"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/payment-methods/{id}": {
+			"get": {
+				"tags": ["payment-methods"],
+				"summary": "Get payment method by ID",
+				"operationId": "getPaymentMethodById",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "PaymentMethod object",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PaymentMethod"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid ID supplied"
+					},
+					"404": {
+						"description": "Payment method not found"
+					}
+				}
+			},
+			"patch": {
+				"tags": ["payment-methods"],
+				"summary": "Update payment method by ID",
+				"operationId": "updatePaymentMethodById",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "Payment method object to be updated",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PaymentMethod"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "PaymentMethod object",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PaymentMethod"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid ID supplied"
+					},
+					"404": {
+						"description": "Payment method not found"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["payment-methods"],
+				"summary": "Delete payment method by ID",
+				"operationId": "deletePaymentMethodById",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Payment method deleted"
+					},
+					"400": {
+						"description": "Invalid ID supplied"
+					},
+					"404": {
+						"description": "Payment method not found"
+					}
+				}
+			}
+		},
+		"/stores": {
+			"post": {
+				"tags": ["stores"],
+				"summary": "Create a new store",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "store",
+						"description": "Store object",
+						"required": true,
+						"schema": {
+							"$ref": "#/components/schemas/Store"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/components/schemas/Store"
+						}
+					}
+				}
+			},
+			"get": {
+				"tags": ["stores"],
+				"summary": "Get all stores",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Store"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/stores/{id}": {
+			"get": {
+				"tags": ["stores"],
+				"summary": "Get store by ID",
+				"operationId": "getStoreById",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Store object",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Store"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid ID supplied"
+					},
+					"404": {
+						"description": "Store not found"
+					}
+				}
+			},
+			"patch": {
+				"tags": ["stores"],
+				"summary": "Update store by ID",
+				"operationId": "updateStoreById",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "Store object to be updated",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Store"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Store object",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Store"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid ID supplied"
+					},
+					"404": {
+						"description": "Store not found"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["stores"],
+				"summary": "Delete store by ID",
+				"operationId": "deleteStoreById",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Store deleted"
+					},
+					"400": {
+						"description": "Invalid ID supplied"
+					},
+					"404": {
+						"description": "Store not found"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"User": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"format": "uuid",
+						"example": "123e4567-e89b-12d3-a456-426655440000"
+					},
+					"username": {
+						"type": "string",
+						"example": "john-doe"
+					},
+					"firstName": {
+						"type": "string",
+						"example": "John"
+					},
+					"lastName": {
+						"type": "string",
+						"example": "Doe"
+					},
+					"email": {
+						"type": "string",
+						"example": "johndoe@example.com"
+					},
+					"password": {
+						"type": "string",
+						"example": "password"
+					},
+					"profilePicture": {
+						"type": "string",
+						"format": "uri",
+						"example": "https://example.com/profile.jpg"
+					}
+				}
+			},
+			"PaymentMethod": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"format": "uuid",
+						"example": "123e4567-e89b-12d3-a456-426655440000"
+					},
+					"cardAlias": {
+						"type": "string",
+						"example": "John Doe's Visa"
+					},
+					"cardholderName": {
+						"type": "string",
+						"example": "John Doe"
+					},
+					"cardNumber": {
+						"type": "string",
+						"example": "4545454545454545"
+					},
+					"expirationDate": {
+						"type": "string",
+						"format": "date",
+						"example": "03/23"
+					},
+					"cvv": {
+						"type": "number",
+						"format": "integer",
+						"example": "123"
+					},
+					"userId": {
+						"type": "string",
+						"format": "uuid",
+						"example": "123e4567-e89b-12d3-a456-426655440000"
+					}
+				}
+			},
+			"Store": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"format": "uuid",
+						"example": "123e4567-e89b-12d3-a456-426655440000"
+					},
+					"slug": {
+						"type": "string",
+						"example": "walmart"
+					},
+					"name": {
+						"type": "string",
+						"example": "Walmart"
+					},
+					"logo": {
+						"type": "string",
+						"format": "uri",
+						"example": "https://example.com/logo.jpg"
+					},
+					"latitude": {
+						"type": "number",
+						"format": "double"
+					},
+					"longitude": {
+						"type": "number",
+						"format": "double"
+					},
+					"address": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}
