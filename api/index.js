@@ -1,12 +1,16 @@
 const express = require('express');
+const config = require('../config');
+const routerApi = require('./routes');
 
 const app = express();
-const port = 
+const port = config.api.port;
 
 app.use(express.json());
 
+routerApi(app);
+
 app.get('/', (req, res) => {
-  // Replace with pretty HTML
+	// Replace with pretty HTML
 	res.send("ShopMate's API");
 });
 
