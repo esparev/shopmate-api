@@ -8,7 +8,8 @@
 	},
 	"servers": [
 		{ "url": "http://localhost:3000/api/v1" },
-		{ "url": "https://shopmate.up.railway.app/api/v1" }
+		{ "url": "https://shopmate.up.railway.app/api/v1" },
+		{ "url": "https://shopmate-api.esparev.com/api/v1" }
 	],
 	"paths": {
 		"/users": {
