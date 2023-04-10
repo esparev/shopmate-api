@@ -8,7 +8,6 @@ const email = Joi.string().email();
 const password = Joi.string().min(8);
 const role = Joi.string().valid('admin', 'user');
 const avatar = Joi.string().uri();
-const createdAt = Joi.date().default(Date.now());
 
 /**
  * Schema to validate the getUser request
@@ -28,7 +27,6 @@ const createUserSchema = Joi.object({
 	password: password.required(),
 	role: role.required(),
 	avatar,
-	createdAt: createdAt.required(),
 });
 
 /**

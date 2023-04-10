@@ -8,7 +8,6 @@ const image = Joi.string().uri();
 const weight = Joi.number().min(0);
 const measeurementUnit = Joi.string();
 const quantity = Joi.number().min(0);
-const createdAt = Joi.date().default(Date.now());
 const storeId = Joi.string().uuid({ version: 'uuidv4' });
 const categoryId = Joi.string().uuid({ version: 'uuidv4' });
 
@@ -30,7 +29,6 @@ const createProductSchema = Joi.object({
 	weight: weight.required(),
 	measeurementUnit: measeurementUnit.required(),
 	quantity: quantity.required(),
-	createdAt: createdAt.required(),
 	storeId: storeId.required(),
 	categoryId: categoryId.required(),
 });

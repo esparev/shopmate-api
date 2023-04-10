@@ -2,7 +2,6 @@ const Joi = require('joi');
 
 const id = Joi.string().uuid({ version: 'uuidv4' });
 const total = Joi.number().min(0);
-const createdAt = Joi.date().default(Date.now());
 const userId = Joi.string().uuid({ version: 'uuidv4' });
 
 /**
@@ -17,7 +16,6 @@ const getShoplistSchema = Joi.object({
  */
 const createShoplistSchema = Joi.object({
 	total: total.required(),
-	createdAt: createdAt.required(),
 	userId: userId.required(),
 });
 

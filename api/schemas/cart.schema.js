@@ -8,7 +8,6 @@ const latitude = Joi.number().min(-90).max(90);
 const longitude = Joi.number().min(-180).max(180);
 const productTotal = Joi.number().min(0).default(0);
 const digitalSignature = Joi.string();
-const createdAt = Joi.date().default(Date.now());
 const storeId = Joi.string().uuid({ version: 'uuidv4' });
 const userId = Joi.string().uuid({ version: 'uuidv4' });
 
@@ -25,14 +24,11 @@ const getCartSchema = Joi.object({
 const createCartSchema = Joi.object({
 	quantity,
 	active: active.required(),
-	lastConnection: lastConnection.required(),
 	latitude: latitude.required(),
 	longitude: longitude.required(),
 	productTotal: productTotal.required(),
 	digitalSignature: digitalSignature.required(),
-	createdAt: createdAt.required(),
 	storeId: storeId.required(),
-	userId,
 });
 
 /**
@@ -46,7 +42,7 @@ const updateCartSchema = Joi.object({
 	longitude,
 	productTotal,
 	digitalSignature,
-	createdAt,
+	userId,
 });
 
 module.exports = { getCartSchema, createCartSchema, updateCartSchema };

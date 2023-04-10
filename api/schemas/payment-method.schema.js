@@ -8,7 +8,6 @@ const network = Joi.string();
 const expiryMonth = Joi.number().min(1).max(12);
 const expiryYear = Joi.number().min(2021);
 const cvv = Joi.string().min(3).max(4);
-const createdAt = Joi.date().default(Date.now());
 const userId = Joi.string().uuid({ version: 'uuidv4' });
 
 /**
@@ -29,7 +28,6 @@ const createPaymentMethodSchema = Joi.object({
 	expiryMonth: expiryMonth.required(),
 	expiryYear: expiryYear.required(),
 	cvv: cvv.required(),
-	createdAt: createdAt.required(),
 	userId: userId.required(),
 });
 

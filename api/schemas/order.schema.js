@@ -5,7 +5,6 @@ const total = Joi.number().min(0);
 const certified = Joi.boolean();
 const certificate = Joi.string();
 const status = Joi.string().valid('pending', 'approved', 'rejected');
-const createdAt = Joi.date().default(Date.now());
 const userId = Joi.string().uuid({ version: 'uuidv4' });
 const storeId = Joi.string().uuid({ version: 'uuidv4' });
 const cartId = Joi.string().uuid({ version: 'uuidv4' });
@@ -26,7 +25,6 @@ const createOrderSchema = Joi.object({
 	certified: certified.required(),
 	certificate: certificate.required(),
 	status: status.required(),
-	createdAt: createdAt.required(),
 	userId: userId.required(),
 	storeId: storeId.required(),
 	cartId: cartId.required(),

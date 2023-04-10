@@ -9,7 +9,6 @@ const phone = Joi.string();
 const address = Joi.string();
 const latitude = Joi.number().min(-90).max(90);
 const longitude = Joi.number().min(-180).max(180);
-const createdAt = Joi.date().default(Date.now());
 
 /**
  * Schema to validate the getStore request
@@ -30,7 +29,6 @@ const createStoreSchema = Joi.object({
 	address: address.required(),
 	latitude: latitude.required(),
 	longitude: longitude.required(),
-	createdAt: createdAt.required(),
 });
 
 /**
