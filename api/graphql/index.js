@@ -1,0 +1,1 @@
+const {loadFiles} = require('@graphql-tools/load-files');

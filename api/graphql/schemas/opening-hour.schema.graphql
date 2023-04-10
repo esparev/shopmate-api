@@ -1,0 +1,32 @@
+type Query {
+  openingHour(id: ID!): OpeningHour
+  openingHours: [OpeningHour!]!
+}
+
+type Mutation {
+  createOpeningHour(data: CreateOpeningHour!): OpeningHour
+  updateOpeningHour(id: ID!, data: UpdateOpeningHour!): OpeningHour
+  deleteOpeningHour(id: ID!): ID
+}
+
+type OpeningHour {
+  id: UUID!
+  day: String!
+  openingHour: Int!
+  closingHour: Int!
+  createdAt: DateTime!
+  store: Store!
+}
+
+input CreateOpeningHour {
+  day: String!
+  openingHour: Int!
+  closingHour: Int!
+  storeId: UUID!
+}
+
+input UpdateOpeningHour {
+  day: String
+  openingHour: Int
+  closingHour: Int
+}

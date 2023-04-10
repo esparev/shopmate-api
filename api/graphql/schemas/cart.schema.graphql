@@ -1,0 +1,46 @@
+type Query {
+  cart(id: ID!): Cart
+  carts: [Cart!]!
+}
+
+type Mutation {
+  createCart(data: CreateCart!): Cart
+  updateCart(id: ID!, data: UpdateCart!): Cart
+  deleteCart(id: ID!): ID
+}
+
+type Cart {
+  id: UUID!
+  quantity: Int!
+  active: Boolean!
+  lastConnection: DateTime!
+  latitude: Latitude!
+  longitude: Longitude!
+  productTotal: Float!
+  digitalSignature: String!
+  createdAt: DateTime!
+  store: Store!
+  user: User!
+  products: [Product!]!
+}
+
+input CreateCart {
+  quantity: Int
+  active: Boolean!
+  latitude: Latitude!
+  longitude: Longitude!
+  productTotal: Float!
+  digitalSignature: String!
+  storeId: UUID!
+}
+
+input UpdateCart {
+  quantity: Int
+  active: Boolean
+  lastConnection: DateTime
+  latitude: Latitude
+  longitude: Longitude
+  productTotal: Float
+  digitalSignature: String
+  userId: UUID
+}

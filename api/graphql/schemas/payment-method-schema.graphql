@@ -1,0 +1,38 @@
+type Query {
+  paymentMethod(id: ID!): PaymentMethod
+  paymentMethods: [PaymentMethod!]!
+}
+
+type Mutation {
+  createPaymentMethod(data: CreatePaymentMethod!): PaymentMethod
+  updatePaymentMethod(id: ID!, data: UpdatePaymentMethod!): PaymentMethod
+  deletePaymentMethod(id: ID!): ID
+}
+
+type PaymentMethod {
+  id: UUID!
+  alias: String!
+  cardholderName: String!
+  number: String!
+  network: String!
+  expiryMonth: Int!
+  expiryYear: Int!
+  cvv: String!
+  createdAt: DateTime!
+  user: User!
+}
+
+input CreatePaymentMethod {
+  alias: String!
+  cardholderName: String!
+  number: String!
+  network: String!
+  expiryMonth: Int!
+  expiryYear: Int!
+  cvv: String!
+  userId: UUID!
+}
+
+input UpdatePaymentMethod {
+  alias: String
+}

@@ -1,0 +1,27 @@
+type Query {
+  shoplist(id: ID!): Shoplist
+  shoplists: [Shoplist!]!
+}
+
+type Mutation {
+  createShoplist(data: CreateShoplist!): Shoplist
+  updateShoplist(id: ID!, data: UpdateShoplist!): Shoplist
+  deleteShoplist(id: ID!): ID
+}
+
+type Shoplist {
+  id: UUID!
+  total: Float!
+  createdAt: DateTime!
+  user: User!
+  products: [Product!]!
+}
+
+input CreateShoplist {
+  total: Float!
+  userId: UUID!
+}
+
+input UpdateShoplist {
+  total: Float
+}
