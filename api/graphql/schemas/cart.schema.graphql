@@ -16,7 +16,7 @@ type Cart {
   lastConnection: DateTime!
   latitude: Latitude!
   longitude: Longitude!
-  productTotal: Float!
+  total: Float!
   digitalSignature: String!
   createdAt: DateTime!
   store: Store!
@@ -29,7 +29,7 @@ input CreateCart {
   active: Boolean!
   latitude: Latitude!
   longitude: Longitude!
-  productTotal: Float!
+  total: Float!
   digitalSignature: String!
   storeId: UUID!
 }
@@ -40,7 +40,7 @@ input UpdateCart {
   lastConnection: DateTime
   latitude: Latitude
   longitude: Longitude
-  productTotal: Float
+  total: Float
   digitalSignature: String
   userId: UUID
 }

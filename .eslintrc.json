@@ -9,6 +9,9 @@
 		"jest": true
 	},
 	"rules": {
-		"no-console": "warn"
+		"no-console": "warn",
+		"semi": ["error", "never"],
+		"quotes": ["error", "single"],
+		"singleQuote": true
 	}
 }
