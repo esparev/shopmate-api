@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>ShopMate • API</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;500;600;700;900&family=Manrope:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script>
+			tailwind.config = {
+				theme: {
+					extend: {
+						fontFamily: {
+							inter: ["Inter"],
+							manrope: ["Manrope"],
+							dela: ["Dela Gothic One"],
+						},
+						colors: {
+							black: "#000000",
+							"carbon-100": "#171717",
+							"carbon-200": "#323232",
+							"white-10": "rgba(255, 255, 255, 0.1)",
+							"white-70": "rgba(255, 255, 255, 0.7)",
+							"white-100": "#FFFFFF",
+							"gray-100": "#EEEEEE",
+							"gray-200": "#D9D9D9",
+							"gray-300": "#818181",
+							"green-50": "rgba(0, 125, 17, 0.5)",
+							"green-100": "#4EE062",
+							"green-200": "#007D11",
+							"green-300": "#00373E",
+							"green-400": "#40686E",
+						},
+						spacing: {
+							"1/2": "2px",
+							1: "4px",
+							2: "8px",
+							3: "12px",
+							4: "16px",
+							5: "20px",
+							6: "24px",
+							7: "28px",
+							8: "32px",
+							9: "36px",
+							10: "40px",
+						},
+						animation: {
+							"spin-slower": "spin 6s linear infinite",
+						},
+					},
+				},
+			};
+		</script>
+	</head>
+	<body>
+		<section class="h-screen">
+			<!-- {/* Header */} -->
+			<header class="flex justify-between items-center px-40 py-8">
+				<!-- {/* Logo */} -->
+				<a href="" class="flex items-center gap-x-3">
+					<svg
+						width="24"
+						height="25"
+						viewBox="0 0 20 21"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M7.92356 12L7.34023 8.5H13.8063L12.6396 12H7.92356Z"
+							fill="black"
+						/>
+						<path
+							fill-rule="evenodd"
+							clip-rule="evenodd"
+							d="M10 20.5C15.5228 20.5 20 16.0228 20 10.5C20 4.97715 15.5228 0.5 10 0.5C4.47715 0.5 0 4.97715 0 10.5C0 16.0228 4.47715 20.5 10 20.5ZM5.5 6C5.22386 6 5 6.22386 5 6.5C5 6.77614 5.22386 7 5.5 7H6.07644L7.0068 12.5822C7.04699 12.8233 7.25558 13 7.5 13H13C13.2152 13 13.4063 12.8623 13.4743 12.6581L14.9743 8.15811C15.0252 8.00564 14.9996 7.83803 14.9056 7.70764C14.8116 7.57726 14.6607 7.5 14.5 7.5H7.17356L6.9932 6.4178C6.95301 6.17671 6.74442 6 6.5 6H5.5ZM8 14C7.44772 14 7 14.4477 7 15C7 15.5523 7.44772 16 8 16C8.55228 16 9 15.5523 9 15C9 14.4477 8.55228 14 8 14ZM13 14C12.4477 14 12 14.4477 12 15C12 15.5523 12.4477 16 13 16C13.5523 16 14 15.5523 14 15C14 14.4477 13.5523 14 13 14Z"
+							fill="black"
+						/>
+					</svg>
+					<p class="font-dela">ShopMate</p>
+				</a>
+				<!-- {/* Buttons */} -->
+				<div class="flex items-center gap-x-5">
+					<a href="" class="font-inter font-normal"> Iniciar sesión </a>
+					<a
+						href=""
+						class="font-inter font-semibold bg-green-100 px-5 py-2 rounded-full"
+					>
+						Comenzar
+					</a>
+				</div>
+			</header>
+			<!-- {/* Main */} -->
+			<main class="h-4/5 flex flex-col items-center justify-between">
+				<div class="flex flex-col items-center gap-y-5 mt-28">
+					<div class="flex flex-col items-center">
+						<p class="font-manrope font-bold text-6xl">
+							Simplifica tus compras
+						</p>
+						<div class="w-full flex gap-x-1 justify-center">
+							<p class="font-manrope font-bold text-6xl">con</p>
+							<div class="relative min-w-[400px]">
+								<p class="absolute font-dela text-6xl z-10">ShopMate</p>
+								<svg
+									class="absolute"
+									width="400"
+									height="70"
+									viewBox="0 0 400 70"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M10 60C25.8435 45.9834 41.1642 30.4429 57.2906 17.1093C58.1365 16.4099 66.5719 8.59698 68.325 10.2218C70.3593 12.1072 69.5633 33.2751 69.7888 36.4414C70.0091 39.5346 69.5783 53.3867 72.6037 55.0691C77.6927 57.8991 86.9012 39.3813 89.4932 35.8936C94.4232 29.2596 99.8916 22.7739 106.157 18.6747C109.761 16.3174 108.692 25.3942 108.972 28.3016C110.321 42.2806 110.803 56.5178 122.878 51.0775C135.138 45.5541 146.349 36.1388 157.501 27.3624C162.967 23.0617 164.567 20.0448 165.271 28.8495C165.895 36.659 166.695 45.1307 169.099 52.3298C171.759 60.2953 176.585 55.3685 180.584 52.1732C188.456 45.8835 196.184 39.0377 204.567 34.0934C210.191 30.776 208.234 37.5197 209.746 43.0942C215.266 63.4369 226.811 47.4991 235.643 39.9635C243.057 33.6383 252.114 24.3837 261.09 22.9011C264.871 22.2767 267.341 35.0206 268.859 38.3981C270.691 42.4732 272.264 46.5154 276.066 45.1291C288.83 40.4748 300.568 30.611 312.772 23.8403C317.784 21.0597 320.851 18.7416 323.018 26.3449C324.187 30.4451 326.171 41.4443 329.943 42.7028C340.588 46.2547 349.749 23.8586 359.612 22.6663C363.119 22.2424 361.185 50.4554 369.746 41.6854C375.098 36.2032 379.298 32.0892 385.397 29.006C387.538 27.9236 388.466 27.7479 389 24.7795"
+										stroke="#4EE062"
+										stroke-width="20"
+										stroke-linecap="round"
+									/>
+								</svg>
+							</div>
+						</div>
+					</div>
+					<p class="w-3/5 font-inter font-normal text-center text-carbon-200">
+						Di adiós a las largas filas para pagar y las molestas innecesarias
+						con nuestro carrito inteligente.
+					</p>
+				</div>
+			</main>
+		</section>
+	</body>
+</html>
