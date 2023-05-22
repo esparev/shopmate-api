@@ -1,0 +1,6 @@
+module.exports = {
+	config: "./api/db/config.ts",
+	"models-path": "./api/db/models/",
+	"migrations-path": "./api/db/migrations/",
+	"seeders-path": "./api/db/seeders/",
+};
