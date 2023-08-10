@@ -4,9 +4,9 @@ import { OpeningHours } from "./opening-hours.model";
 import { Product } from "./product.model";
 import { Order } from "./order.model";
 import { Cart } from "./cart.model";
+import { TableNames } from "../tables";
 
-const STORE_TABLE = "store";
-const options = modelOptions(false, "Store", STORE_TABLE);
+const options = modelOptions(false, "Store", TableNames.STORE_TABLE);
 
 const StoreSchema = {
 	id: {
@@ -77,4 +77,4 @@ class Store extends Model {
 	}
 }
 
-export { Store, StoreSchema, STORE_TABLE };
+export { Store, StoreSchema };

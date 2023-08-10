@@ -2,6 +2,8 @@ import { Sequelize, Options } from "sequelize";
 import setupModels from "./models";
 import config from "../../config";
 
+const username: string = config.dbUser as string;
+const password: string = config.dbPassword as string;
 const database: string = config.isProd
 	? (config.databaseUrl as string)
 	: (config.dbUrl as string);
@@ -17,7 +19,7 @@ if (config.isProd) {
 	};
 }
 
-const sequelize = new Sequelize(database, "shopmate", undefined, options);
+const sequelize = new Sequelize(database, username, password, options);
 
 setupModels(sequelize);
 

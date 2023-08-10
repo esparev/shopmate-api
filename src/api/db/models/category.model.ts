@@ -1,9 +1,9 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import modelOptions from "../../../utils/modelOptions";
 import { Product } from "./product.model";
+import { TableNames } from "../tables";
 
-const CATEGORY_TABLE = "category";
-const options = modelOptions(false, "Category", CATEGORY_TABLE);
+const options = modelOptions(false, "Category", TableNames.CATEGORY_TABLE);
 
 const CategorySchema = {
 	id: {
@@ -39,4 +39,4 @@ class Category extends Model {
 	}
 }
 
-export { Category, CategorySchema, CATEGORY_TABLE };
+export { Category, CategorySchema };

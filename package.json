@@ -7,7 +7,15 @@
     "build": "npx tsc",
     "start": "node dist/api/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/api/index.js\"",
-    "lint": "eslint"
+    "lint": "eslint",
+    "migrations:generate": "sequelize-cli migration:generate --name",
+    "migrations:run": "sequelize-cli db:migrate",
+    "migrations:revert": "sequelize-cli db:migrate:undo",
+    "migrations:delete": "sequelize-cli db:migrate:undo:all",
+    "seed:generate": "sequelize-cli seed:generate --name",
+    "seed:all": "sequelize-cli db:seed:all",
+    "seed:revert": "sequelize-cli db:seed:undo",
+    "seed:delete": "sequelize-cli db:seed:undo:all"
   },
   "author": "JoseMa Esparev <jm.esparev@gmail.com>",
   "license": "MIT",
@@ -41,7 +49,7 @@
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "nodemon": "^2.0.22",
+    "nodemon": "^3.0.1",
     "prettier": "^2.8.7"
   }
 }

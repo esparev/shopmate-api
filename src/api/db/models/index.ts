@@ -11,20 +11,53 @@ import { Shoplist, ShoplistSchema } from "./shoplist.model";
 import { ShoplistItem, ShoplistItemSchema } from "./shoplist-items.model";
 import { Store, StoreSchema } from "./store.model";
 import { User, UserSchema } from "./user.model";
+import { TableNames } from "../tables";
 
 function setupModels(sequelize: Sequelize) {
 	User.init(UserSchema, User.config(sequelize));
 	Store.init(StoreSchema, Store.config(sequelize));
 	Category.init(CategorySchema, Category.config(sequelize));
-	Product.init(ProductSchema, Product.config(sequelize));
-	Cart.init(CartSchema, Cart.config(sequelize));
-	Shoplist.init(ShoplistSchema, Shoplist.config(sequelize));
-	OpeningHours.init(OpeningHoursSchema, OpeningHours.config(sequelize));
-	PaymentMethod.init(PaymentMethodSchema, PaymentMethod.config(sequelize));
-	Order.init(OrderSchema, Order.config(sequelize));
-	CartItem.init(CartItemSchema, CartItem.config(sequelize));
-	OrderItem.init(OrderItemSchema, OrderItem.config(sequelize));
-	ShoplistItem.init(ShoplistItemSchema, ShoplistItem.config(sequelize));
+	Product.init(
+		ProductSchema(TableNames.STORE_TABLE, TableNames.CATEGORY_TABLE),
+		Product.config(sequelize)
+	);
+	Cart.init(
+		CartSchema(TableNames.STORE_TABLE, TableNames.USER_TABLE),
+		Cart.config(sequelize)
+	);
+	Shoplist.init(
+		ShoplistSchema(TableNames.USER_TABLE),
+		Shoplist.config(sequelize)
+	);
+	OpeningHours.init(
+		OpeningHoursSchema(TableNames.STORE_TABLE),
+		OpeningHours.config(sequelize)
+	);
+	PaymentMethod.init(
+		PaymentMethodSchema(TableNames.USER_TABLE),
+		PaymentMethod.config(sequelize)
+	);
+	Order.init(
+		OrderSchema(
+			TableNames.USER_TABLE,
+			TableNames.STORE_TABLE,
+			TableNames.CART_TABLE,
+			TableNames.PAYMENT_METHOD_TABLE
+		),
+		Order.config(sequelize)
+	);
+	CartItem.init(
+		CartItemSchema(TableNames.CART_TABLE, TableNames.PRODUCT_TABLE),
+		CartItem.config(sequelize)
+	);
+	OrderItem.init(
+		OrderItemSchema(TableNames.ORDER_TABLE, TableNames.PRODUCT_TABLE),
+		OrderItem.config(sequelize)
+	);
+	ShoplistItem.init(
+		ShoplistItemSchema(TableNames.SHOPLIST_TABLE, TableNames.PRODUCT_TABLE),
+		ShoplistItem.config(sequelize)
+	);
 
 	User.associate();
 	Store.associate();

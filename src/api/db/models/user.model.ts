@@ -4,9 +4,9 @@ import { PaymentMethod } from "./payment-method.model";
 import { Order } from "./order.model";
 import { Shoplist } from "./shoplist.model";
 import { Cart } from "./cart.model";
+import { TableNames } from "../tables";
 
-const USER_TABLE = "user";
-const options = modelOptions(false, "User", USER_TABLE);
+const options = modelOptions(false, "User", TableNames.USER_TABLE);
 
 const UserSchema = {
 	id: {
@@ -80,4 +80,4 @@ class User extends Model {
 	}
 }
 
-export { User, UserSchema, USER_TABLE };
+export { User, UserSchema };
