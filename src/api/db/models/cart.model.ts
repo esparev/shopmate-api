@@ -5,101 +5,90 @@ import { User } from "./user.model";
 import { Order } from "./order.model";
 import { Product } from "./product.model";
 import { CartItem } from "./cart-items.model";
-import { TableNames } from "../tables";
+import { TableNames } from "../../../types/definitions";
 
-const options = modelOptions(false, "Cart", TableNames.CART_TABLE);
+const options = modelOptions(TableNames.CartTable);
 
-const CartSchema = (
-	storeId: TableNames.STORE_TABLE,
-	userId: TableNames.USER_TABLE
-) => {
-	return {
-		id: {
-			allowNull: false,
-			type: DataTypes.UUID,
-			defaultValue: DataTypes.UUIDV4,
-			primaryKey: true,
+const CartSchema = {
+	id: {
+		allowNull: false,
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true,
+	},
+	quantity: {
+		allowNull: false,
+		type: DataTypes.INTEGER,
+		defaultValue: 0,
+	},
+	active: {
+		allowNull: false,
+		type: DataTypes.BOOLEAN,
+		defaultValue: false,
+	},
+	lastConnection: {
+		allowNull: false,
+		field: "last_connection",
+		type: DataTypes.DATE,
+		defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+	},
+	latitude: {
+		allowNull: false,
+		type: DataTypes.FLOAT,
+		validate: {
+			min: -90,
+			max: 90,
 		},
-		quantity: {
-			allowNull: false,
-			type: DataTypes.INTEGER,
-			defaultValue: 0,
+	},
+	longitude: {
+		allowNull: false,
+		type: DataTypes.FLOAT,
+		validate: {
+			min: -180,
+			max: 180,
 		},
-		active: {
-			allowNull: false,
-			type: DataTypes.BOOLEAN,
-			defaultValue: false,
+	},
+	total: {
+		allowNull: false,
+		field: "product_total",
+		type: DataTypes.FLOAT,
+		defaultValue: 0,
+		validate: {
+			min: 0,
 		},
-		lastConnection: {
-			allowNull: false,
-			field: "last_connection",
-			type: DataTypes.DATE,
-			defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+	},
+	digitalSignature: {
+		allowNull: false,
+		field: "digital_signature",
+		type: DataTypes.STRING,
+	},
+	storeId: {
+		allowNull: false,
+		field: "store_id",
+		type: DataTypes.UUID,
+		references: {
+			model: TableNames.StoreTable,
+			key: "id",
 		},
-		latitude: {
-			allowNull: false,
-			type: DataTypes.FLOAT,
-			validate: {
-				min: -90,
-				max: 90,
-			},
+		onUpdate: "CASCADE",
+		onDelete: "SET NULL",
+	},
+	userId: {
+		allowNull: false,
+		field: "user_id",
+		type: DataTypes.UUID,
+		references: {
+			model: TableNames.UserTable,
+			key: "id",
 		},
-		longitude: {
-			allowNull: false,
-			type: DataTypes.FLOAT,
-			validate: {
-				min: -180,
-				max: 180,
-			},
-		},
-		total: {
-			allowNull: false,
-			field: "product_total",
-			type: DataTypes.FLOAT,
-			defaultValue: 0,
-			validate: {
-				min: 0,
-			},
-		},
-		digitalSignature: {
-			allowNull: false,
-			field: "digital_signature",
-			type: DataTypes.STRING,
-		},
-		createdAt: {
-			allowNull: false,
-			field: "created_at",
-			type: DataTypes.DATE,
-			defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-		},
-		storeId: {
-			allowNull: false,
-			field: "store_id",
-			type: DataTypes.UUID,
-			references: {
-				model: storeId,
-				key: "id",
-			},
-			onUpdate: "CASCADE",
-			onDelete: "SET NULL",
-		},
-		userId: {
-			allowNull: false,
-			field: "user_id",
-			type: DataTypes.UUID,
-			references: {
-				model: userId,
-				key: "id",
-			},
-			onUpdate: "CASCADE",
-			onDelete: "SET NULL",
-		},
-	};
+		onUpdate: "CASCADE",
+		onDelete: "SET NULL",
+	},
 };
 
 class Cart extends Model {
 	static config(sequelize: Sequelize) {
-		return { sequelize, options };
+		return { sequelize, ...options };
 	}
 
 	static associate() {

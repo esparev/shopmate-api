@@ -11,68 +11,48 @@ import { ShoplistItemSchema } from "../models/shoplist-items.model";
 import { ShoplistSchema } from "../models/shoplist.model";
 import { StoreSchema } from "../models/store.model";
 import { UserSchema } from "../models/user.model";
-import { TableNames } from "../tables";
+import { TableNames } from "../../../types/definitions";
 
 module.exports = {
 	async up(queryInterface: QueryInterface, Sequelize: Sequelize) {
-		await queryInterface.createTable(TableNames.USER_TABLE, UserSchema);
-		await queryInterface.createTable(TableNames.STORE_TABLE, StoreSchema);
-		await queryInterface.createTable(TableNames.CATEGORY_TABLE, CategorySchema);
+		await queryInterface.createTable(TableNames.UserTable, UserSchema);
+		await queryInterface.createTable(TableNames.StoreTable, StoreSchema);
+		await queryInterface.createTable(TableNames.CategoryTable, CategorySchema);
+		await queryInterface.createTable(TableNames.ProductTable, ProductSchema);
+		await queryInterface.createTable(TableNames.CartTable, CartSchema);
+		await queryInterface.createTable(TableNames.ShoplistTable, ShoplistSchema);
 		await queryInterface.createTable(
-			TableNames.PRODUCT_TABLE,
-			ProductSchema(TableNames.STORE_TABLE, TableNames.CATEGORY_TABLE)
+			TableNames.OpeningHoursTable,
+			OpeningHoursSchema
 		);
 		await queryInterface.createTable(
-			TableNames.CART_TABLE,
-			CartSchema(TableNames.STORE_TABLE, TableNames.USER_TABLE)
+			TableNames.PaymentMethodTable,
+			PaymentMethodSchema
+		);
+		await queryInterface.createTable(TableNames.OrderTable, OrderSchema);
+		await queryInterface.createTable(TableNames.CartItemTable, CartItemSchema);
+		await queryInterface.createTable(
+			TableNames.OrderItemTable,
+			OrderItemSchema
 		);
 		await queryInterface.createTable(
-			TableNames.SHOPLIST_TABLE,
-			ShoplistSchema(TableNames.USER_TABLE)
-		);
-		await queryInterface.createTable(
-			TableNames.OPENING_HOURS_TABLE,
-			OpeningHoursSchema(TableNames.STORE_TABLE)
-		);
-		await queryInterface.createTable(
-			TableNames.PAYMENT_METHOD_TABLE,
-			PaymentMethodSchema(TableNames.USER_TABLE)
-		);
-		await queryInterface.createTable(
-			TableNames.ORDER_TABLE,
-			OrderSchema(
-				TableNames.USER_TABLE,
-				TableNames.STORE_TABLE,
-				TableNames.CART_TABLE,
-				TableNames.PAYMENT_METHOD_TABLE
-			)
-		);
-		await queryInterface.createTable(
-			TableNames.CART_ITEM_TABLE,
-			CartItemSchema(TableNames.CART_TABLE, TableNames.PRODUCT_TABLE)
-		);
-		await queryInterface.createTable(
-			TableNames.ORDER_ITEM_TABLE,
-			OrderItemSchema(TableNames.ORDER_TABLE, TableNames.PRODUCT_TABLE)
-		);
-		await queryInterface.createTable(
-			TableNames.SHOPLIST_ITEM_TABLE,
-			ShoplistItemSchema(TableNames.SHOPLIST_TABLE, TableNames.PRODUCT_TABLE)
+			TableNames.ShoplistItemTable,
+			ShoplistItemSchema
 		);
 	},
 
 	async down(queryInterface: QueryInterface, Sequelize: Sequelize) {
-		await queryInterface.dropTable(TableNames.CART_ITEM_TABLE);
-		await queryInterface.dropTable(TableNames.ORDER_ITEM_TABLE);
-		await queryInterface.dropTable(TableNames.SHOPLIST_ITEM_TABLE);
-		await queryInterface.dropTable(TableNames.OPENING_HOURS_TABLE);
-		await queryInterface.dropTable(TableNames.PAYMENT_METHOD_TABLE);
-		await queryInterface.dropTable(TableNames.PRODUCT_TABLE);
-		await queryInterface.dropTable(TableNames.SHOPLIST_TABLE);
-		await queryInterface.dropTable(TableNames.ORDER_TABLE);
-		await queryInterface.dropTable(TableNames.CART_TABLE);
-		await queryInterface.dropTable(TableNames.STORE_TABLE);
-		await queryInterface.dropTable(TableNames.CATEGORY_TABLE);
-		await queryInterface.dropTable(TableNames.USER_TABLE);
+		await queryInterface.dropTable(TableNames.CartItemTable);
+		await queryInterface.dropTable(TableNames.OrderItemTable);
+		await queryInterface.dropTable(TableNames.ShoplistItemTable);
+		await queryInterface.dropTable(TableNames.OpeningHoursTable);
+		await queryInterface.dropTable(TableNames.OrderTable);
+		await queryInterface.dropTable(TableNames.PaymentMethodTable);
+		await queryInterface.dropTable(TableNames.ProductTable);
+		await queryInterface.dropTable(TableNames.ShoplistTable);
+		await queryInterface.dropTable(TableNames.CartTable);
+		await queryInterface.dropTable(TableNames.StoreTable);
+		await queryInterface.dropTable(TableNames.CategoryTable);
+		await queryInterface.dropTable(TableNames.UserTable);
 	},
 };

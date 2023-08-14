@@ -4,9 +4,9 @@ import { OpeningHours } from "./opening-hours.model";
 import { Product } from "./product.model";
 import { Order } from "./order.model";
 import { Cart } from "./cart.model";
-import { TableNames } from "../tables";
+import { TableNames } from "../../../types/definitions";
 
-const options = modelOptions(false, "Store", TableNames.STORE_TABLE);
+const options = modelOptions(TableNames.StoreTable);
 
 const StoreSchema = {
 	id: {
@@ -56,17 +56,11 @@ const StoreSchema = {
 			max: 180,
 		},
 	},
-	createdAt: {
-		allowNull: false,
-		field: "created_at",
-		type: DataTypes.DATE,
-		defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-	},
 };
 
 class Store extends Model {
 	static config(sequelize: Sequelize) {
-		return { sequelize, options };
+		return { sequelize, ...options };
 	}
 
 	static associate() {

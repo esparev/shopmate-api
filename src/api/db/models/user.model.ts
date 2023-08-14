@@ -4,9 +4,9 @@ import { PaymentMethod } from "./payment-method.model";
 import { Order } from "./order.model";
 import { Shoplist } from "./shoplist.model";
 import { Cart } from "./cart.model";
-import { TableNames } from "../tables";
+import { TableNames, Roles } from "../../../types/definitions";
 
-const options = modelOptions(false, "User", TableNames.USER_TABLE);
+const options = modelOptions(TableNames.UserTable);
 
 const UserSchema = {
 	id: {
@@ -45,7 +45,7 @@ const UserSchema = {
 	role: {
 		allowNull: false,
 		type: DataTypes.STRING,
-		defaultValue: "user",
+		defaultValue: Roles.User,
 	},
 	avatar: {
 		allowNull: true,
@@ -56,17 +56,11 @@ const UserSchema = {
 		field: "recovery_token",
 		type: DataTypes.STRING,
 	},
-	createdAt: {
-		allowNull: false,
-		field: "created_at",
-		type: DataTypes.DATE,
-		defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-	},
 };
 
 class User extends Model {
 	static config(sequelize: Sequelize) {
-		return { sequelize, options };
+		return { sequelize, ...options };
 	}
 
 	static associate() {

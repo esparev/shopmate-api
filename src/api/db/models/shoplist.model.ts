@@ -3,45 +3,37 @@ import modelOptions from "../../../utils/modelOptions";
 import { User } from "./user.model";
 import { Product } from "./product.model";
 import { ShoplistItem } from "./shoplist-items.model";
-import { TableNames } from "../tables";
+import { TableNames } from "../../../types/definitions";
 
-const options = modelOptions(false, "Shoplist", TableNames.SHOPLIST_TABLE);
+const options = modelOptions(TableNames.ShoplistTable);
 
-const ShoplistSchema = (userTable: TableNames.USER_TABLE) => {
-	return {
-		id: {
-			allowNull: false,
-			type: DataTypes.UUID,
-			defaultValue: DataTypes.UUIDV4,
-			primaryKey: true,
+const ShoplistSchema = {
+	id: {
+		allowNull: false,
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true,
+	},
+	total: {
+		allowNull: false,
+		type: DataTypes.FLOAT,
+	},
+	userId: {
+		allowNull: false,
+		field: "user_id",
+		type: DataTypes.UUID,
+		references: {
+			model: TableNames.UserTable,
+			key: "id",
 		},
-		total: {
-			allowNull: false,
-			type: DataTypes.FLOAT,
-		},
-		createdAt: {
-			allowNull: false,
-			field: "created_at",
-			type: DataTypes.DATE,
-			defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-		},
-		userId: {
-			allowNull: false,
-			field: "user_id",
-			type: DataTypes.UUID,
-			references: {
-				model: userTable,
-				key: "id",
-			},
-			onUpdate: "CASCADE",
-			onDelete: "SET NULL",
-		},
-	};
+		onUpdate: "CASCADE",
+		onDelete: "SET NULL",
+	},
 };
 
 class Shoplist extends Model {
 	static config(sequelize: Sequelize) {
-		return { sequelize, options };
+		return { sequelize, ...options };
 	}
 
 	static associate() {

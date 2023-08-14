@@ -4,9 +4,7 @@ import config from "../../config";
 
 const username: string = config.dbUser as string;
 const password: string = config.dbPassword as string;
-const database: string = config.isProd
-	? (config.databaseUrl as string)
-	: (config.dbUrl as string);
+const database: string = config.dbName as string;
 
 const options: Options = {
 	dialect: "postgres",

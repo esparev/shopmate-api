@@ -1,9 +1,9 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import modelOptions from "../../../utils/modelOptions";
 import { Product } from "./product.model";
-import { TableNames } from "../tables";
+import { TableNames } from "../../../types/definitions";
 
-const options = modelOptions(false, "Category", TableNames.CATEGORY_TABLE);
+const options = modelOptions(TableNames.CategoryTable);
 
 const CategorySchema = {
 	id: {
@@ -21,17 +21,11 @@ const CategorySchema = {
 		allowNull: false,
 		type: DataTypes.STRING,
 	},
-	createdAt: {
-		allowNull: false,
-		field: "created_at",
-		type: DataTypes.DATE,
-		defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-	},
 };
 
 class Category extends Model {
 	static config(sequelize: Sequelize) {
-		return { sequelize, options };
+		return { sequelize, ...options };
 	}
 
 	static associate() {
